@@ -1,0 +1,39 @@
+digraph "terraform-aws-s3-cf-redirect" {
+	graph [fontcolor="#2D3436" fontname="Sans-Serif" fontsize=15 label="terraform-aws-s3-cf-redirect" margin=-2 nodesep=0.60 pad=2.0 rankdir=TB ranksep=0.75 splines=ortho]
+	node [fixedsize=true fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [color="#7B8894"]
+	subgraph cluster_ {
+		graph [bgcolor="#E5F5FD" fontname="Sans-Serif" fontsize=12 label="" labeljust=l margin=10 pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		subgraph "cluster_Web Facing" {
+			graph [bgcolor="#EBF3E7" fontname="Sans-Serif" fontsize=12 label="Web Facing" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+			c4302896b9ea4762b805c11e35ca2a9c [label="redirect target" height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/onprem/network/internet.png" shape=none]
+			f7414ca7b75f4767bb7c384c4dc1100a [label="cloudFront distro" height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/network/cloudfront.png" shape=none]
+		}
+		subgraph cluster_S3 {
+			graph [bgcolor="#EBF3E7" fontname="Sans-Serif" fontsize=12 label=S3 labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+			subgraph cluster_Encryption {
+				graph [bgcolor="#ECE8F6" fontname="Sans-Serif" fontsize=12 label=Encryption labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+				"556d0706ac4c477bb04bb6a1309a5ca2" [label=kms height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/security/key-management-service.png" shape=none]
+			}
+			subgraph cluster_Buckets {
+				graph [bgcolor="#ECE8F6" fontname="Sans-Serif" fontsize=12 label=Buckets labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+				"202509ffe4cb445995c2848ed9e43848" [label=logbucket height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+				"6d9464067cdb420fbdf68483e8ba0ebd" [label="www-fqdn" height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+				"58eb77a4e2c84265bd67e7789bf7474d" [label=fqdn height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+			}
+		}
+		subgraph "cluster_Route 53" {
+			graph [bgcolor="#EBF3E7" fontname="Sans-Serif" fontsize=12 label="Route 53" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+			subgraph "cluster_Alias Records" {
+				graph [bgcolor="#ECE8F6" fontname="Sans-Serif" fontsize=12 label="Alias Records" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+				d4c7246b55b1483ea5c3cf11cebf1419 [label="www-fqdn" height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/network/route-53.png" shape=none]
+				"8ac39a708b5a46df93bc4f19538e701e" [label=fqdn height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/network/route-53.png" shape=none]
+			}
+			subgraph "cluster_ACM Certs" {
+				graph [bgcolor="#ECE8F6" fontname="Sans-Serif" fontsize=12 label="ACM Certs" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+				d02d009d80b34088b745cc866fc66374 [label=acm height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/security/certificate-manager.png" shape=none]
+				"8f0d8db0b0964a67945e21f33a01e65c" [label="acm validation" height=1.9 image="/home/ghostinajar/.cache/pypoetry/virtualenvs/diagrams-infra-k7gOb7FT-py3.8/lib/python3.8/site-packages/resources/aws/network/route-53.png" shape=none]
+			}
+		}
+	}
+}
